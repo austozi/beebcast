@@ -1,8 +1,8 @@
 # Beebscast
 
-A self-hosted BBC podcast manager. The application will download audio files using [get_iplayer](https://get-iplayer.github.io/get_iplayer/), store them on your own server and generate HTML pages and RSS feeds for them. 
+A self-hosted BBC podcast manager. The application will download media files using [get_iplayer](https://get-iplayer.github.io/get_iplayer/), store them on your own server and generate HTML pages and RSS feeds for them. 
 
-It uses [exiftool](https://www.exiftool.org/) to extract metadata from the download files and use it to populate the HTML page and RSS feed. All content is served as static files by the web server. It does not use a database or serve dynamic content.
+It uses [exiftool](https://www.exiftool.org/) to extract metadata from the downloaded media and use them to populate the HTML page and RSS feed. All content is served as static files by the web server. It does not use a database or serve dynamic content.
 
 ## Build
 
