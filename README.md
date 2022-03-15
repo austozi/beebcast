@@ -6,7 +6,7 @@ It uses [exiftool](https://www.exiftool.org/) to extract metadata from the downl
 
 ## Build
 
-Clone this repo and execute `docker build .` from the directory where Dockerfile is.
+An ARM64 image is available from [Docker Hub](https://hub.docker.com/austozi/beebscast). If you wish to build your own image, simply clone this repo and execute `docker build .` from the directory where Dockerfile is.
 
 ## Install
 
