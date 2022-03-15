@@ -52,3 +52,14 @@ networks:
       config:
         - subnet: 172.16.33.0/29
 ```
+### Environment variables
+
+| Environment variable      | Function |
+|---------------------------|----------|
+| BEEBCAST_BASEURL          | Public URL for the instance, defaults to http://localhost |
+| BEEBCAST_FEED_ID          | Programme ID, e.g. for the programme available at https://www.bbc.co.uk/programmes/b006s5dp, this is equivalent to 'b006s5dp' |
+| BEEBCAST_MEDIA_PATH       | Folder inside docker container where the media files are to be mounted. Must be within the document root fo the Apache web server at /var/www/localhost/host |
+| BEEBCAST_RETENTION_DAYS   | Number of days to retain downloaded media for. Media older than this will be automatically deleted. |
+| BEEBCAST_REFRESH_INTERVAL | Number of seconds to wait upon a content update before starting the next one. |
+
+
