@@ -1,3 +1,22 @@
+# Beebscast
+
+A self-hosted [BBC podcast](https://www.bbc.co.uk/sounds/podcasts) manager. The application will download media files using [get_iplayer](https://get-iplayer.github.io/get_iplayer/), store them on your own server and generate HTML pages and RSS feeds for them. 
+
+It uses [exiftool](https://www.exiftool.org/) to extract metadata from the downloaded media and use them to populate the HTML pages and RSS feeds. All content is served as static files by the web server (Apache). It does not use a database or serve dynamic content.
+
+## Build
+
+An arm64 image is available from [Docker Hub](https://hub.docker.com/r/austozi/beebscast). It is based on the [TheSpad/docker-get_iplayer image](https://github.com/TheSpad/docker-get_iplayer). 
+
+If you wish to build your own image, simply clone this repo and execute `docker build .` from the directory where Dockerfile is.
+
+## Install
+
+The easiest way to install this application is using [docker-compose](https://docs.docker.com/compose/).
+
+Example docker-compose.yml:
+
+```
 version: "3"
 services:
   beebcast:
@@ -21,7 +40,7 @@ services:
     volumes:
       - ./config:/config
       - ./config/www:/var/www/localhost/htdocs
-      - /media/elements/podcasts:/var/www/localhost/htdocs/media
+      - ./podcasts:/var/www/localhost/htdocs/media
     expose:
       - 80
     networks:
@@ -32,3 +51,4 @@ networks:
     ipam:
       config:
         - subnet: 172.16.33.0/29
+```
