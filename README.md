@@ -1,4 +1,4 @@
-# Beebscast
+# Beebcast
 
 A self-hosted [BBC podcast](https://www.bbc.co.uk/sounds/podcasts) manager. The application will download media files using [get_iplayer](https://get-iplayer.github.io/get_iplayer/), store them on your own server and generate HTML pages and RSS feeds for them. It can manage any audio file that get_iplayer can download, even if no official RSS feed is available.
 
