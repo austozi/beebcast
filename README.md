@@ -1,2 +1,3 @@
-# beebscast
-A self-hosted BBC podcast manager
+# Beebscast
+
+A self-hosted BBC podcast manager.
