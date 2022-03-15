@@ -6,7 +6,9 @@ It uses [exiftool](https://www.exiftool.org/) to extract metadata from the downl
 
 ## Build
 
-An ARM64 image is available from [Docker Hub](https://hub.docker.com/austozi/beebscast). If you wish to build your own image, simply clone this repo and execute `docker build .` from the directory where Dockerfile is.
+An ARM64 image is available from [Docker Hub](https://hub.docker.com/r/austozi/beebscast). It is based on the [TheSpad/docker-get_iplayer image](https://github.com/TheSpad/docker-get_iplayer). 
+
+If you wish to build your own image, simply clone this repo and execute `docker build .` from the directory where Dockerfile is.
 
 ## Install
 
