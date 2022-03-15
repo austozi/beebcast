@@ -54,7 +54,7 @@ networks:
 ```
 ### Environment variables
 
-| Environment variable      | Function |
+| Variable      | Function |
 |---------------------------|----------|
 | BEEBCAST_BASEURL          | Public URL for the instance, defaults to http://localhost |
 | BEEBCAST_FEED_ID          | Space-separated list of programme IDs, e.g. for the programme available at https://www.bbc.co.uk/programmes/b006s5dp, the programme ID is 'b006s5dp'. |
