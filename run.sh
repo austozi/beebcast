@@ -35,7 +35,7 @@ generate_feed() {
 	local albumArtUrl=$(echo "$scrapedHtml" | grep -Eom 1 "<link rel=\"apple-touch-icon\" sizes=\"152x152\" href=\"[^\"]+\">" | cut -d '"' -f 6)
 	local albumTitle=$(echo "$scrapedHtml" | grep -Eom 1 "<a href=\"/programmes\/[a-z0-9]+\">.+<\/a>" | cut -d ">" -f 2 | cut -d "<" -f 1)
 	local albumDescription=$(echo "$scrapedHtml" | grep -Eom 1 "<meta name=\"description\" content=\"[^\"]+\">" | cut -d '"' -f 4)
-	local albumPubDate=$(date +%c)
+	local albumPubDate=$(date +"%Y-%m-%d %H:%M:%S")
 
 	# Create folder for rss and media files:
 	mkdir -p "$BEEBCAST_MEDIA_PATH/$programmeId"
@@ -68,7 +68,7 @@ generate_feed() {
 		echo "Processing: $audioFile"
 		audioTitle=$(exiftool -Title -E -s -s -s "$audioFile")
 		audioDescription=$(exiftool -Lyrics -E -s -s -s "$audioFile" | sed -E "s@(PLAY|INFO): https://www.bbc.co.uk/programmes/[a-z0-9]+@@g" | sed -E "s|[\.]{2,}|\. |g" | sed -E "s|\. +\.|\.|g")
-		audioPubDate=$(exiftool -ContentCreateDate -s -s -s -d %c "$audioFile")
+		audioPubDate=$(exiftool -ContentCreateDate -s -s -s -d "%Y-%m-%d %H:%M:%S" "$audioFile")
 		audioUrl=$BEEBCAST_BASEURL/media/$programmeId/$(basename "$audioFile" .m4a).m4a
 
 		# Update XML file with media information:
@@ -95,22 +95,25 @@ generateIndices() {
 	indexHtml="$indexHtml<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\"/>"
 	indexHtml="$indexHtml</head>"
 	indexHtml="$indexHtml<body>"
-	indexHtml="$indexHtml<h1>Beebcasts</h1>"
+	indexHtml="$indexHtml<h1>Beebcast</h1>"
 	indexHtml="$indexHtml<p>Podcasts from the <a href=\"https://www.bbc.co.uk/sounds\">BBC</a></p>"
-	indexHtml="$indexHtml<ul>"
+	
+	get_iplayer --refresh
 	
 	for feedId in $BEEBCAST_FEED_ID; do
 		local albumTitle=$(curl -sL "https://www.bbc.co.uk/programmes/$feedId" | grep -Eom 1 "<a href=\"/programmes/[a-z0-9]+\">.+</a>" | sed -E "s|<[^>]+>||g")
 		generate_feed "$feedId"
 		echo "--------------------------------"
-		indexHtml="$indexHtml<li><a href=\"/media/$feedId/\">$albumTitle</a> (<a href=\"/media/$feedId/index.xml\">RSS</a>)</li>"
+		indexHtml="$indexHtml<div><a href=\"/media/$feedId/\">$albumTitle</a> (<a href=\"/media/$feedId/index.xml\">RSS</a>)</div>"
 	done
 
-	indexHtml="$indexHtml</ul></body></html>"
+	indexHtml="$indexHtml</body></html>"
 	echo "$indexHtml" > "$BEEBCAST_WEBROOT/index.html"
-
+	
+	echo "Sleeping, back in $BEEBCAST_REFRESH_INTERVAL second(s)..."
 	sleep $BEEBCAST_REFRESH_INTERVAL
+	generateIndices
 }
 
-httpd -D FOREGROUND &
-generateIndices
+generateIndices &
+httpd -D FOREGROUND
