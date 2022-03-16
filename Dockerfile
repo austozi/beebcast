@@ -5,4 +5,4 @@ RUN apk add --no-cache \
   exiftool
 ADD run.sh /run.sh
 EXPOSE 80
-CMD ["/bin/sh", "/run.sh"]
+CMD ["/bin/sh","-c","/run.sh"]
