@@ -1,5 +1,7 @@
 # Beebcast
 
+**This was a rather poor first attempt at making a podcast feed generator, but I did learn a ton from it. This repo will now be archived as a testament to that, and a witness to my history with making podcast feed generators. As such it will no longer be maintained. If you came here looking for a podcast generator, check out the successor at [github.com/austozi/docker-podcast-server](https://github.com/austozi/docker-podcast-server).**
+
 Beebcast is a self-hosted [BBC podcast](https://www.bbc.co.uk/sounds/podcasts) manager. The application will download media files using [get_iplayer](https://get-iplayer.github.io/get_iplayer/), store them on your own server and generate HTML pages and RSS feeds for them. It can manage any audio file that get_iplayer can download, even if no official RSS feed is available.
 
 It uses [exiftool](https://www.exiftool.org/) to extract metadata from the downloaded media and use them to populate the HTML pages and RSS feeds. All content is served as static files by the web server (Apache). It does not use a database or serve dynamic content.
